@@ -64,3 +64,13 @@ export {
   findComponentsDownward,
   findBrothersComponents
 };
+
+const urlAlphabet = 'useandom-TPXpxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict'
+export function uuid (size = 21) {
+  let id = ''
+  let i = size
+  while (i--) {
+    id += urlAlphabet[(Math.random() * 54) | 0]
+  }
+  return id
+}

@@ -23,7 +23,7 @@
 
 <script lang="ts" setup name="ICheckbox">
 import { inject, onMounted, reactive, ref, watch } from 'vue'
-import { useFindComponentUpward, useInstance } from '../../hooks'
+import { useFindComponentUpward } from '../../hooks'
 
 const insideGroup =  ref(false)
 const formItemContext: any = inject('i-form-item-context', undefined)
@@ -86,7 +86,6 @@ const change = (event: any) => {
 
 const model = ref<any>(null)
 const updateModel = (val: any) => {
-  console.log(val)
   model.value = val || []
 }
 const updateCurrentValueByGroup = () => {
