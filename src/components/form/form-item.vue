@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script setup name="iFormItem">
+<script setup name="IFormItem">
 import { ref, computed, inject, onMounted, provide, reactive } from 'vue'
 import AsyncValidator from 'async-validator';
 
@@ -90,7 +90,7 @@ const initRules = () => {
 
 const context = reactive({
   validate,
-  resetField
+  resetField,
 })
 
 provide('i-form-item-context', context)

@@ -7,6 +7,9 @@
       <i-form-item label="邮箱" prop="email">
         <i-input v-model="formData.email"></i-input>
       </i-form-item>
+      <i-form-item label="同意" prop="agree">
+        <i-checkbox v-model="formData.agree" />
+      </i-form-item>
     </i-form>
 
     <button @click="handleReset">重置</button>
@@ -19,10 +22,12 @@ import { ref } from 'vue'
 import IForm from '../components/form/form.vue'
 import IFormItem from '../components/form/form-item.vue'
 import IInput from '../components/input/input.vue'
+import ICheckbox from '../components/checkbox/checkbox.vue'
 
 const formData = ref({
   name: '',
-  email: '123'
+  email: '123',
+  agree: false
 })
 
 const validateRules = ref({
@@ -32,6 +37,9 @@ const validateRules = ref({
   email: [
     { required: true, message: '邮箱不能为空', trigger: 'blur' },
     { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+  ],
+  agree: [
+    { message: '不能不勾选', trigger: 'change', validator: (rule, val) => val === true }
   ]
 })
 

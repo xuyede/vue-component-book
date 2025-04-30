@@ -1,9 +1,12 @@
 <template>
   <div>
-    <Home/>
+    <InputDemo/>
+    <CheckboxDemo />
   </div>
 </template>
 
 <script setup name="App">
-import Home from './views/Home.vue'
+import InputDemo from './views/InputDemo.vue'
+import CheckboxDemo from './views/CheckboxDemo.vue'
+
 </script>
