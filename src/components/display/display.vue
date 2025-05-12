@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts" setup name="IDisplay">
-import { createApp, defineComponent, onMounted, ref } from 'vue';
+import { onMounted, ref, createVNode, render, onBeforeUnmount } from 'vue';
 
+const instances: any = []
 
 const props = defineProps({
   code: {
@@ -13,6 +14,8 @@ const props = defineProps({
   }
 })
 
+const id = ref('123')
+const el = ref<any>(null)
 const html = ref('')
 const js = ref('')
 const css = ref('')
@@ -53,22 +56,46 @@ const renderCode = () => {
 
     parseStrToFunc.template = html.value
 
-    const Component = defineComponent(parseStrToFunc)
-    const app = createApp(Component).mount(document.createElement('div'))
-    displayRef.value.appendChild(app.$el)
+    const container = document.createElement('div')
+    el.value = container
+
+    const vm = createVNode(
+      parseStrToFunc
+    )
+
+    render(vm, container)
+    instances.push({ vm })
+    displayRef.value.appendChild(container.firstElementChild)
 
     if (css.value !== '') {
       const style = document.createElement('style');
       style.type = 'text/css';
-      style.id = 'deye';
+      style.id = id.value;
       style.innerHTML = css.value;
       document.getElementsByTagName('head')[0].appendChild(style);
     }
   }
 }
 
+const destroyCode = () => {
+  const $target = document.getElementById(id.value)
+
+  if ($target) {
+    $target.parentNode?.removeChild($target)
+  }
+
+  if (el.value) {
+    displayRef.value.removeChild(el.value.firstElementChild)
+    el.value = null
+  }
+}
+
 onMounted(() => {
   renderCode()
+})
+
+onBeforeUnmount(() => {
+  destroyCode()
 })
 
 </script>
