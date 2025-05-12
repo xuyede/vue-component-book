@@ -4,4 +4,9 @@ import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vueSetupExtend()],
+  resolve: {
+    alias: {
+      'vue': 'vue/dist/vue.esm-bundler.js'
+    }
+  }
 })
